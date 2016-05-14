@@ -32,6 +32,7 @@ $directories = getDirectories('./Assets/Documents/Country/Austria');
                                     <a href="<?php echo $file;?>"><i class="fa fa-file" aria-hidden="true"></i></a>
                                         &nbsp;&nbsp;&nbsp;
                                     <?php echo ($fileTitle !== null) ? $fileTitle : basename($file); ?>
+                                    <?php echo $fileDesc; ?>
                                 </div>
                                 <div class="col-md-8">
                                     <a href="download.html?file=<?php echo $file;?>" class="btn btn-sm">Download</a>
@@ -39,6 +40,7 @@ $directories = getDirectories('./Assets/Documents/Country/Austria');
                                             data-id="<?php echo base64_encode($file);?>"
                                             data-title="<?php echo base64_encode($fileTitle); ?>"
                                             data-category="<?php echo base64_encode(basename($directory)); ?>"
+                                            data-directory="<?php echo $directory; ?>"
                                             data-description="<?php echo base64_encode($fileDesc); ?>">Edit</button>
                                     <button type="button" class="btn btn-sm">Delete</button>
                                 </div>

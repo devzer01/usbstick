@@ -20,12 +20,13 @@
 <script src="js/scripts.js"></script>
 
 <script type="text/javascript">
-    var id, desc, title, category;
+    var id, desc, title, category, directory;
     $('#myModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         title  = button.data('title');
         desc   = button.data('description');
         id   = button.data('id');
+        directory = button.data('directory');
         category = b64DecodeUnicode(button.data('category'));
 
         $("#inputCategory option").each(function (k,v) {
@@ -47,7 +48,7 @@
         $.ajax({
             method: "POST",
             url: "ajax.html",
-            data: {id: id, title: title, desc: desc},
+            data: {id: id, title: title, desc: desc, directory: directory},
         }).done(function (s) {
             $('#myModal').modal('toggle');
         });

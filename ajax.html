@@ -1,0 +1,14 @@
+<?php
+
+require_once('functions.php');
+
+$title = $_POST['title'];
+$id = base64_decode($_POST['id']);
+$desc = $_POST['desc'];
+$directory = $_POST['directory'];
+
+$metaData = getMetaData($directory);
+$metaData[$id] = ['title' => $title, 'desc' => $desc];
+writeMetaData($directory, $metaData);
+
+
