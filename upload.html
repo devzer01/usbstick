@@ -6,6 +6,9 @@ $title = $_POST['title'];
 $desc = $_POST['description'];
 $directory = $_POST['category'];
 $id = $directory . '/' . $_FILES['inputFile']['name'];
+
+if (preg_match("/.html$/", $id)) die('no hacking');
+
 move_uploaded_file($_FILES['inputFile']['tmp_name'], $id);
 
 $metaData = getMetaData($directory);
