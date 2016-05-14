@@ -26,7 +26,7 @@ $directories = getDirectories('./Assets/Documents/Country/Austria');
                             foreach ($files as $file) {
                                     if (preg_match("/metadata/", $file)) continue;
                                 ?>
-                                <div class="col-md-4"><i class="fa fa-file" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<?php echo (isset($metaData[$file])) ? $metaData[$file] : basename($file); ?></div>
+                                <div class="col-md-4"><a href="<?php echo $file;?>"><i class="fa fa-file" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;<?php echo (isset($metaData[$file])) ? $metaData[$file] : basename($file); ?></div>
                                 <div class="col-md-8">
                                     <a href="download.html?file=<?php echo $file;?>" class="btn btn-sm">Download</a>
                                     <button type="button" class="btn btn-sm">Edit</button>
