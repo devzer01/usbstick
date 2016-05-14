@@ -59,6 +59,7 @@
             data: {id: id, title: title, desc: desc, directory: directory},
         }).done(function (s) {
             $('#myModal').modal('toggle');
+            window.location.reload();
         });
 
     });
