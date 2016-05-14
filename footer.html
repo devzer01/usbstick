@@ -23,25 +23,33 @@
     var id, desc, title, category, directory;
     $('#myModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
-        title  = button.data('title');
-        desc   = button.data('description');
-        id   = button.data('id');
-        directory = button.data('directory');
-        category = b64DecodeUnicode(button.data('category'));
+        if (button.attr('id') != "AddFile") {
+            title = button.data('title');
+            desc = button.data('description');
+            id = button.data('id');
+            directory = button.data('directory');
+            category = b64DecodeUnicode(button.data('category'));
 
-        $("#inputCategory option").each(function (k,v) {
-            if ($(v).text() == category) {
-                $(v).attr('selected', true);
-            }
-        });
+            $("#inputCategory option").each(function (k, v) {
+                if ($(v).text() == category) {
+                    $(v).attr('selected', true);
+                }
+            });
 
-        var modal = $(this);
-        modal.find('#inputTitle').val(b64DecodeUnicode(title));
-        modal.find('#inputDescription').val(b64DecodeUnicode(desc));
-        modal.find('#metaId').val(id);
+            var modal = $(this);
+            modal.find('#inputTitle').val(b64DecodeUnicode(title));
+            modal.find('#inputDescription').val(b64DecodeUnicode(desc));
+            modal.find('#metaId').val(id);
+        }
     });
 
     $("#saveFile").click(function (e) {
+
+        if ($("#exampleInputFile").get('0').files.length > 0) {
+            $("#fileUploadForm").submit();
+            return true;
+        }
+
         var title = $("#inputTitle").val();
         var desc  = $("#inputDescription").val();
 
@@ -54,6 +62,19 @@
         });
 
     });
+
+    $(".deleteFile").click(function (e) {
+        var id = $(this).data('id');
+        var directory = $(this).data('directory');
+        $.ajax({
+            method: "POST",
+            url: "delete.html",
+            data: {id: id, directory: directory},
+        }).done(function (s) {
+            window.location.reload();
+        });
+
+    })
 
     function b64DecodeUnicode(str) {
         return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {

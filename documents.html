@@ -42,7 +42,10 @@ $directories = getDirectories('./Assets/Documents/Country/Austria');
                                             data-category="<?php echo base64_encode(basename($directory)); ?>"
                                             data-directory="<?php echo $directory; ?>"
                                             data-description="<?php echo base64_encode($fileDesc); ?>">Edit</button>
-                                    <button type="button" class="btn btn-sm">Delete</button>
+                                    <button type="button" class="btn btn-sm deleteFile"
+                                            data-directory="<?php echo $directory; ?>"
+                                            data-id="<?php echo base64_encode($file);?>"
+                                            >Delete</button>
                                 </div>
                             <?php } ?>
                 </div>
@@ -53,7 +56,7 @@ $directories = getDirectories('./Assets/Documents/Country/Austria');
     <!--end of container-->
 </section>
 
-<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Add File</button>
+<button type="button" id="AddFile" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Add File</button>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -66,10 +69,10 @@ $directories = getDirectories('./Assets/Documents/Country/Austria');
                 <h4 class="modal-title">Add/Edit File</h4>
             </div>
             <div class="modal-body">
-                <form>
+                <form enctype="multipart/form-data" action="upload.html" id="fileUploadForm" method="post">
                     <div class="form-group">
                         <label for="inputTitle">Title</label>
-                        <input type="title" class="form-control" id="inputTitle" placeholder="Title">
+                        <input type="title" class="form-control" name="title" id="inputTitle" placeholder="Title">
                     </div>
                     <div class="form-group">
                         <label for="inputDescription">Description</label>
@@ -85,7 +88,7 @@ $directories = getDirectories('./Assets/Documents/Country/Austria');
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile">File input</label>
-                        <input type="file" id="exampleInputFile">
+                        <input type="file" name="inputFile" id="exampleInputFile">
                         <p class="help-block">File is only required when uploading</p>
                     </div>
                     <input type="hidden" id="metaId" name="metaId" value="" />

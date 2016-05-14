@@ -1,0 +1,15 @@
+<?php
+
+require_once('functions.php');
+
+$title = $_POST['title'];
+$desc = $_POST['description'];
+$directory = $_POST['category'];
+$id = $directory . '/' . $_FILES['inputFile']['name'];
+move_uploaded_file($_FILES['inputFile']['tmp_name'], $id);
+
+$metaData = getMetaData($directory);
+$metaData[$id] = ['title' => $title, 'desc' => $desc];
+writeMetaData($directory, $metaData);
+header("Location: documents.html");
+

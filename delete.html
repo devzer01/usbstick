@@ -1,0 +1,11 @@
+<?php
+
+require_once('functions.php');
+
+$id = base64_decode($_POST['id']);
+$directory = $_POST['directory'];
+unlink($id);
+$metaData = getMetaData($directory);
+unset($metaData[$id]);
+writeMetaData($directory, $metaData);
+
