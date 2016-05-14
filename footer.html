@@ -18,5 +18,50 @@
 <script src="js/smooth-scroll.min.js"></script>
 <script src="js/parallax.js"></script>
 <script src="js/scripts.js"></script>
+
+<script type="text/javascript">
+    var id, desc, title, category;
+    $('#myModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        title  = button.data('title');
+        desc   = button.data('description');
+        id   = button.data('id');
+        category = b64DecodeUnicode(button.data('category'));
+
+        $("#inputCategory option").each(function (k,v) {
+            if ($(v).text() == category) {
+                $(v).attr('selected', true);
+            }
+        });
+
+        var modal = $(this);
+        modal.find('#inputTitle').val(b64DecodeUnicode(title));
+        modal.find('#inputDescription').val(b64DecodeUnicode(desc));
+        modal.find('#metaId').val(id);
+    });
+
+    $("#saveFile").click(function (e) {
+        var title = $("#inputTitle").val();
+        var desc  = $("#inputDescription").val();
+
+        $.ajax({
+            method: "POST",
+            url: "ajax.html",
+            data: {id: id, title: title, desc: desc},
+        }).done(function (s) {
+            $('#myModal').modal('toggle');
+        });
+
+    });
+
+    function b64DecodeUnicode(str) {
+        return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {
+            return '%' + c.charCodeAt(0).toString(16);
+        }).join(''));
+    }
+
+</script>
+
+
 </body>
 </html>
