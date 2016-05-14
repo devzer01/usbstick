@@ -1,0 +1,90 @@
+<?php
+require_once('config.php');
+require_once('header.html');
+require_once('functions.php');
+
+$directories = getDirectories('./Assets/Documents/Country/Austria');
+
+?>
+
+<section class="projects pt48">
+    <div class="container">
+        <div class="row pb24"></div>
+        <!--end of row-->
+        <div class="row masonry-loader">
+            <div class="col-sm-12 text-center">
+                <div class="spinner"></div>
+            </div>
+        </div>
+        <div class="row masonry masonryFlyIn">
+            <?php foreach ($directories as $directory) { ?>
+                <div class="row">
+                    <div><?php echo basename($directory); ?></div>
+                    <?php
+                            $files = getFiles($directory);
+                            $metaData = getMetaData($directory);
+                            foreach ($files as $file) {
+                                    if (preg_match("/metadata/", $file)) continue;
+                                ?>
+                                <div class="col-md-4"><?php echo (isset($metaData[$file])) ? $metaData[$file] : basename($file); ?></div>
+                                <div class="col-md-8">
+                                    <button type="button" class="btn btn-sm">Download</button>
+                                    <button type="button" class="btn btn-sm">Edit</button>
+                                    <button type="button" class="btn btn-sm">Delete</button>
+                                </div>
+                            <?php } ?>
+                </div>
+            <?php } ?>
+        </div>
+        <!--end of row-->
+    </div>
+    <!--end of container-->
+</section>
+
+<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Add File</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add/Edit File</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="inputTitle">Title</label>
+                        <input type="title" class="form-control" id="inputTitle" placeholder="Title">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescription">Description</label>
+                        <textarea id="inputDescription" name="description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCategory">Category</label>
+                        <select id="inputCategory" name="category">
+                            <?php foreach ($directories as $directory) { ?>
+                                <option value="<?php echo $directory; ?>"><?php echo basename($directory); ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile">File input</label>
+                        <input type="file" id="exampleInputFile">
+                        <p class="help-block">File is only required when uploading</p>
+                    </div>
+                    <button type="submit" class="btn btn-default">Upload</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<?php require_once('footer.html'); ?>
