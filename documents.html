@@ -2,8 +2,9 @@
 require_once('config.php');
 require_once('header.html');
 require_once('functions.php');
-
-$directories = getDirectories('./Assets/Documents/Country/Austria');
+$country = 'Austria';
+if (isset($_COOKIE['currentCountry'])) $country = $_COOKIE['currentCountry'];
+$directories = getDirectories('./Assets/Documents/Country/' . $country);
 
 ?>
 

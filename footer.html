@@ -6,6 +6,7 @@
     <!--end of container--></footer>
 </div>
 <script src="js/jquery.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/flickr.js"></script>
 <script src="js/flexslider.min.js"></script>
@@ -89,7 +90,14 @@
             window.location.reload();
         });
 
-    })
+    });
+
+    $(".select-country").click(function (e) {
+        var currentCountry = $(this).text();
+        $("#currentCountry").text(currentCountry);
+        $.cookie("currentCountry", currentCountry);
+	window.location.reload();
+    });
 
     function b64DecodeUnicode(str) {
         return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {

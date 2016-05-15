@@ -41,11 +41,14 @@
                 <div class="module widget-handle language left">
                     <ul class="menu">
                         <li class="has-dropdown">
-                            <a href="#">Austria</a>
+                            <?php
+                                $currentCountry = 'Austria';
+                                if (isset($_COOKIE['currentCountry'])) $currentCountry = $_COOKIE['currentCountry']; ?>
+                            <a id='currentCountry' href="#"><?php echo $currentCountry; ?></a>
                             <ul>
                                 <?php
                                     foreach ($countryList as $country) {
-                                        echo '<li><a href="#">' . $country . '</a></li>';
+                                        echo '<li><a href="#" class="select-country">' . $country . '</a></li>';
                                     }
                                 ?>
                             </ul>
