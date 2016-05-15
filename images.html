@@ -1,5 +1,6 @@
 <?php require_once('config.php'); ?>
 <?php require_once('header.html'); ?>
+<?php require_once('functions.php'); ?>
 
 <section class="projects pt48">
     <div class="container">
@@ -11,120 +12,75 @@
             </div>
         </div>
         <div class="row masonry masonryFlyIn">
-            <div class="col-md-3 col-sm-6 masonry-item project" data-filter="People">
-                <div class="image-tile inner-title hover-reveal text-center"><a href="#"> <img alt="Pic"
-                                                                                               src="Assets/images_share/10000.jpg"/>
-                    <div class="title">
-                        <h5 class="uppercase mb0">Global Convention</h5>
+            <?php
+                $images = getFiles('./Assets/images_share');
+                $metaData = getMetaData('./Assets/images_share');
+                foreach ($images as $image) {
+                    $title = basename($image);
+                    if (isset($metaData[$image])) $title = $metaData[$image]['title'];
+
+                ?>
+                    <div class="col-md-3 col-sm-6 masonry-item project" data-filter="People">
+                        <div class="image-tile inner-title hover-reveal text-center"><a href="#">
+                                <img alt="Pic" src="<?php echo $image;?>"/>
+                            <div class="title">
+                                <h5 class="uppercase mb0"><?php echo $title; ?></h5>
+                                <a href="#edit" class='editImage'
+                                   data-id="<?php echo base64_encode($image);?>"
+                                   data-directory="<?php echo './Assets/images_share' ?>"
+                                   data-title="<?php echo base64_encode($title); ?>" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                            </div>
+                        </a></div>
                     </div>
-                </a></div>
-            </div>
-            <div class="col-md-3 col-sm-6 masonry-item project" data-filter="People">
-                <div class="image-tile inner-title hover-reveal text-center"><a href="#"> <img alt="Pic"
-                                                                                               src="Assets/images_share/Screenshot-Aug-04-03.20.03.png"/>
-                    <div class="title">
-                        <h5 class="uppercase mb0">Ready to run</h5>
-                    </div>
-                </a></div>
-            </div>
-            <div class="col-md-3 col-sm-6 masonry-item project" data-filter="People">
-                <div class="image-tile inner-title hover-reveal text-center"><a href="#"> <img alt="Pic"
-                                                                                               src="Assets/images_share/RUN-THE-DAY.png"/>
-                    <div class="title">
-                        <h5 class="uppercase mb0">Run the day</h5>
-                    </div>
-                </a></div>
-            </div>
-            <div class="col-md-3 col-sm-6 masonry-item project" data-filter="People">
-                <div class="image-tile inner-title hover-reveal text-center">
-                    <a href="#">
-                        <img alt="Pic" src="Assets/images_share/Matcha_Ice.jpg"/>
-                        <div class="title">
-                            <h5 class="uppercase mb0">Matcha on ice</h5>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 masonry-item project" data-filter="People">
-                <div class="image-tile inner-title hover-reveal text-center">
-                    <a href="#">
-                        <img alt="Pic" src="Assets/images_share/Screenshot-Jan-12-15.16.20.png"/>
-                        <div class="title">
-                            <h5 class="uppercase mb0">sInGAPORE 2016</h5>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 masonry-item project" data-filter="Objects">
-                <div class="image-tile inner-title hover-reveal text-center">
-                    <a href="#">
-                        <img alt="Pic" src="Assets/images_share/RiskTakers.png"/>
-                        <div class="title">
-                            <h5 class="uppercase mb0">tHE RISK TAKERS</h5>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 masonry-item project" data-filter="People">
-                <div class="image-tile inner-title hover-reveal text-center"><a href="#"> <img alt="Pic"
-                                                                                               src="Assets/images_share/Screenshot-Jan-12-15.17.17.png"/>
-                    <div class="title">
-                        <h5 class="uppercase mb0">FAT BURNING ZONE</h5>
-                    </div>
-                </a></div>
-            </div>
-            <div class="col-md-3 col-sm-6 masonry-item project" data-filter="People">
-                <div class="image-tile inner-title hover-reveal text-center"><a href="#"> <img alt="Pic"
-                                                                                               src="Assets/images_share/11011046_10153112465281419_530890017856778172_o.jpg"/>
-                    <div class="title">
-                        <h5 class="uppercase mb0">BEAST</h5>
-                    </div>
-                </a></div>
-            </div>
-            <div class="col-md-3 col-sm-6 masonry-item project" data-filter="People">
-                <div class="image-tile inner-title hover-reveal text-center"><a href="#"> <img alt="Pic"
-                                                                                               src="Assets/images_share/achieve-01.png"/>
-                    <div class="title">
-                        <h5 class="uppercase mb0">BELIEVE IN YOURSELF</h5>
-                    </div>
-                </a></div>
-            </div>
-            <div class="col-md-3 col-sm-6 masonry-item project" data-filter="People">
-                <div class="image-tile inner-title hover-reveal text-center"><a href="#"> <img alt="Pic"
-                                                                                               src="Assets/images_share/MatchaX.jpg"/>
-                    <div class="title">
-                        <h5 class="uppercase mb0">MATCHA X</h5>
-                    </div>
-                </a></div>
-            </div>
-            <div class="col-md-3 col-sm-6 masonry-item project" data-filter="People">
-                <div class="image-tile inner-title hover-reveal text-center"><a href="#"> <img alt="Pic"
-                                                                                               src="Assets/images_share/myunicity.jpg"/>
-                    <div class="title">
-                        <h5 class="uppercase mb0">MY UNICiTY</h5>
-                    </div>
-                </a></div>
-            </div>
-            <div class="col-md-3 col-sm-6 masonry-item project" data-filter="People">
-                <div class="image-tile inner-title hover-reveal text-center"><a href="#"> <img alt="Pic"
-                                                                                               src="Assets/images_share/a-goal-01.png"/>
-                    <div class="title">
-                        <h5 class="uppercase mb0">GO FOR IT</h5>
-                    </div>
-                </a></div>
-            </div>
-            <div class="col-md-3 col-sm-6 masonry-item project" data-filter="People">
-                <div class="image-tile inner-title hover-reveal text-center">
-                    <p>&nbsp;</p>
-                    <a href="#">
-                        <div class="title">
-                            <h5 class="uppercase mb0">GO FOR IT</h5>
-                        </div>
-                    </a></div>
-            </div>
+            <?php } ?>
         </div>
         <!--end of row-->
     </div>
     <!--end of container-->
 </section>
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add/Edit File</h4>
+            </div>
+            <div class="modal-body">
+                <form enctype="multipart/form-data" action="upload.html" id="fileUploadForm" method="post">
+                    <div class="form-group">
+                        <label for="inputTitle">Title</label>
+                        <input type="title" class="form-control" name="title" id="inputTitle" placeholder="Title">
+                    </div>
+                    <div class="form-group" id="grpDesc">
+                        <label for="inputDescription">Description</label>
+                        <textarea id="inputDescription" name="description"></textarea>
+                    </div>
+                    <div class="form-group" id="grpCategory">
+                        <label for="inputCategory">Category</label>
+                        <select id="inputCategory" name="category">
+                            <?php foreach ($directories as $directory) { ?>
+                            <option value="<?php echo $directory; ?>"><?php echo basename($directory); ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="form-group" id="grpFile">
+                        <label for="exampleInputFile">File input</label>
+                        <input type="file" name="inputFile" id="exampleInputFile">
+                        <p class="help-block">File is only required when uploading</p>
+                    </div>
+                    <input type="hidden" id="metaId" name="metaId" value="" />
+                    <button type="button" class="btn btn-default" id="saveFile">Upload</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <?php require_once('footer.html'); ?>

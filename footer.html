@@ -23,7 +23,7 @@
     var id, desc, title, category, directory;
     $('#myModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
-        if (button.attr('id') != "AddFile") {
+        if (button.attr('id') != "AddFile" && button.attr('class') != "editImage") {
             title = button.data('title');
             desc = button.data('description');
             id = button.data('id');
@@ -41,6 +41,20 @@
             modal.find('#inputDescription').val(b64DecodeUnicode(desc));
             modal.find('#metaId').val(id);
         }
+
+        if (button.attr('class') == "editImage") {
+            $("#grpDesc, #grpCategory, #grpFile").hide();
+            title = button.data('title');
+            id = button.data('id');
+            directory = button.data('directory');
+            desc = "";
+
+            $("#saveFile").text("Update");
+            var modal = $(this);
+            modal.find('#inputTitle').val(b64DecodeUnicode(title));
+            modal.find('#metaId').val(id);
+        }
+
     });
 
     $("#saveFile").click(function (e) {

@@ -14,5 +14,9 @@ move_uploaded_file($_FILES['inputFile']['tmp_name'], $id);
 $metaData = getMetaData($directory);
 $metaData[$id] = ['title' => $title, 'desc' => $desc];
 writeMetaData($directory, $metaData);
+if (isset($_POST['isMedia']) && $_POST['isMedia'] == 1) {
+    header("Location: media.html");
+    exit;
+}
 header("Location: documents.html");
 
